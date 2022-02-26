@@ -29,7 +29,7 @@ services:
   web:
     <<: &web
       # Image for production:
-      image: "registry.gitlab.com/longedok/happiness:latest"
+      image: longedok/happiness:latest
       build:
         target: production_build
         args:
