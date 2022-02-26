@@ -45,7 +45,7 @@ INSTALLED_APPS: Tuple[str, ...] = (
     'health_check',
     'health_check.db',
     'health_check.cache',
-    'health_check.storage',
+    # 'health_check.storage',
 )
 
 MIDDLEWARE: Tuple[str, ...] = (
