@@ -8,6 +8,7 @@ import logging
 from typing import List
 
 from server.settings.components import config
+from server.settings.components.csp import CSP_SCRIPT_SRC as CSP_SCRIPT_SRC_DEFAULT
 from server.settings.components.common import (
     DATABASES,
     INSTALLED_APPS,
@@ -81,7 +82,7 @@ DEBUG_TOOLBAR_CONFIG = {
 
 # This will make debug toolbar to work with django-csp,
 # since `ddt` loads some scripts from `ajax.googleapis.com`:
-CSP_SCRIPT_SRC = ("'self'", 'ajax.googleapis.com')
+CSP_SCRIPT_SRC = CSP_SCRIPT_SRC_DEFAULT + ('ajax.googleapis.com',)
 CSP_IMG_SRC = ("'self'", 'data:')
 CSP_CONNECT_SRC = ("'self'",)
 
@@ -95,7 +96,7 @@ MIDDLEWARE = (  # noqa: WPS440
 ) + MIDDLEWARE
 
 # Logging N+1 requests:
-NPLUSONE_RAISE = True  # comment out if you want to allow N+1 requests
+# NPLUSONE_RAISE = True  # comment out if you want to allow N+1 requests
 NPLUSONE_LOGGER = logging.getLogger('django')
 NPLUSONE_LOG_LEVEL = logging.WARN
 NPLUSONE_WHITELIST = [

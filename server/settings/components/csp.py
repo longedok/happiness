@@ -8,8 +8,9 @@ We are using `django-csp` to provide these headers.
 Docs: https://github.com/mozilla/django-csp
 """
 
-CSP_SCRIPT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-eval'", "'unsafe-inline'", "cdn.jsdelivr.net", "unpkg.com")
+CSP_SCRIPT_SRC_ELEM = ("'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "unpkg.com")
 CSP_IMG_SRC = ("'self'",)
 CSP_FONT_SRC = ("'self'",)
-CSP_STYLE_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", "cdn.jsdelivr.net")
 CSP_DEFAULT_SRC = ("'none'",)

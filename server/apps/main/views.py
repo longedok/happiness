@@ -1,6 +1,9 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
+from server.apps.words.models import Topic
+from server.apps.words.models import Word
+
 
 def index(request: HttpRequest) -> HttpResponse:
     """
@@ -9,4 +12,10 @@ def index(request: HttpRequest) -> HttpResponse:
     Returns rendered default page to the user.
     Typed with the help of ``django-stubs`` project.
     """
-    return render(request, 'main/index.html')
+
+    context = {
+        "words": Word.objects.all(),
+        "topics": Topic.objects.prefetch_related("words").all(),
+    }
+
+    return render(request, 'main/index.html', context=context)

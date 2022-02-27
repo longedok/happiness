@@ -18,3 +18,6 @@ services:
     volumes:
       # We only mount source code in development:
       - .:/code
+  db:
+    ports:
+      - "5432:5432"

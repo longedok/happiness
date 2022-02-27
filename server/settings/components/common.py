@@ -24,6 +24,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 INSTALLED_APPS: Tuple[str, ...] = (
     # Your apps go here:
     'server.apps.main',
+    'server.apps.words',
 
     # Default django apps:
     'django.contrib.auth',
@@ -114,7 +115,7 @@ LOCALE_PATHS = (
 )
 
 USE_TZ = True
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Minsk'
 
 
 # Static files (CSS, JavaScript, Images)
