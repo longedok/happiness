@@ -1,4 +1,8 @@
+from __future__ import annotations
+
+from typing import Final
 import operator
+import time
 from functools import reduce
 
 from django.core.management.base import BaseCommand
@@ -6,6 +10,9 @@ from django.db.models import Q
 
 from server.apps.words.logic.oxford import update_oxford_data
 from server.apps.words.models import Word
+
+
+_FETCH_DELAY_SECONDS: Final[int] = 1
 
 
 class Command(BaseCommand):
@@ -17,10 +24,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if words := options["words"]:
             q_filter = reduce(operator.or_, (Q(word__iexact=word) for word in words))
-            words = Word.objects.filter(q_filter)
+            words = list(Word.objects.filter(q_filter))
         else:
-            words = Word.objects.filter(oxford_data__fetched_at__isnull=True)
+            words = list(Word.objects.filter(oxford_data__fetched_at__isnull=True))
 
+        words_number = len(words)
         for word in words:
             update_oxford_data(word)
 
@@ -29,3 +37,6 @@ class Command(BaseCommand):
                     f"Fetched data for word {word.word}: {word.oxford_data}"
                 )
             )
+
+            if words_number > 1:
+                time.sleep(_FETCH_DELAY_SECONDS)
