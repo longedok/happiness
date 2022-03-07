@@ -16,6 +16,11 @@ deploy:
 	docker pull longedok/happiness:latest
 	docker-compose -f docker-compose.yml -f docker/docker-compose.prod.yml up -d --no-deps web
 
+deploy_full:
+	pass show test
+	docker pull longedok/happiness:latest
+	docker-compose -f docker-compose.yml -f docker/docker-compose.prod.yml up -d
+
 restart:
 	docker-compose up -d --no-deps --force-recreate web
 
