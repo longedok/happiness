@@ -2,31 +2,36 @@
 {% load static %}
 
 {% block content %}
-  <div class="col-10">
-    <div id="words-trainer" v-cloak v-if="currentPage == 'words-trainer'">
-      {% verbatim %}
-      <ul class="list-container topics-list">
-        <li v-for="topic in topics" class="topics-list__item" @click="selectTopic(topic, $event)"
-            v-bind:class="{'topics-list__item_active text-white': topic.selected}">
-          {{ topic.name }}
-        </li>
-      </ul>
+<div id="words-trainer" v-cloak>
+  {% verbatim %}
+  <ul class="list-container topics-list mb-1">
+    <li v-for="topic in topics" class="topics-list__item"
+        @click="selectTopic(topic, $event)"
+        v-bind:class="{'topics-list__item_active text-white': topic.selected}">
+      {{ topic.name }}
+    </li>
+  </ul>
 
-      <ul class="list-container words-list mt-3">
-        <li v-for="word in selectedTopic.words" class="words-list__item" @click="toggleCard(word, $event)">
-          <div class="words-list__item__inner">
-            <div class="words-list__item__front">{{ word.word }}</div>
-            <div class="words-list__item__back">{{ word.translation }}</div>
-          </div>
-        </li>
-      </ul>
-      {% endverbatim %}
-    </div>
-
-    <div id="plans" v-cloak v-if="currentPage == 'plans'">
-      <h3>Comming soon.</h3>
-    </div>
-  </div>
+  <table class="table words-table">
+    <tr class="align-middle" v-for="word in selectedTopic.words">
+      <td>
+        <span class="text-dark words-hint" v-tooltip data-toggle="tooltip"
+              v-bind:title="word.translation">
+          {{ word.word }}
+        </span>
+      </td>
+      <td class="words-table__controls">
+        <div class="btn-group pull-right" role="group" aria-label="Статус слова">
+          <button type="button"
+                  class="btn btn-secondary text-dark bg-light bi-lightbulb-off"></button>
+          <button type="button" class="btn btn-secondary bi-lightbulb"></button>
+          <button type="button" class="btn btn-secondary bi-lightbulb-fill"></button>
+        </div>
+      </td>
+    </tr>
+  </table>
+  {% endverbatim %}
+</div>
 {% endblock %}
 
 {% block inline_scripts %}
