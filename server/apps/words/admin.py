@@ -9,8 +9,9 @@ from server.apps.words.models import Word, Topic, UserWord
 class WordAdmin(admin.ModelAdmin[Word]):
     """Admin panel for `Word` model."""
 
-    list_display = ("word", "translation", "topic", "date")
+    list_display = ("word", "translation", "transcription", "topic", "date")
     list_filter = ("topic", "date")
+    fields = ("word", "translation", "topic", "transcription")
 
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         return super().get_queryset(request).select_related("topic")

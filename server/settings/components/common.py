@@ -206,3 +206,16 @@ EMAIL_TIMEOUT = 5
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
+# Oxford API
+OXFORD_API_APP_ID = config("OXFORD_API_APP_ID", default=None)
+OXFORD_API_APP_KEY = config("OXFORD_API_APP_KEY", default=None)
+
+
+# Celery
+REDIS_HOST = config("REDIS_HOST", default="redis")
+REDIS_PORT = config("REDIS_PORT", cast=int, default=6379)
+CELERY_REDIS_DB = config("CELERY_REDIS_DB", cast=int, default=1)
+
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}"

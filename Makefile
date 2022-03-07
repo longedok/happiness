@@ -15,3 +15,12 @@ deploy:
 	pass show test
 	docker pull longedok/happiness:latest
 	docker-compose -f docker-compose.yml -f docker/docker-compose.prod.yml up -d --no-deps web
+
+restart:
+	docker-compose up -d --no-deps --force-recreate web
+
+shell:
+	docker-compose run --rm web ./manage.py shell
+
+bash:
+	docker-compose run --rm web bash
