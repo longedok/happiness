@@ -27,6 +27,7 @@ class UserWord(models.Model):
     class Meta:
         verbose_name = _("User Word")
         verbose_name_plural = _("User Words")
+        unique_together = ("word", "user")
         constraints = [
             models.CheckConstraint(
                 name="%(app_label)s_%(class)s_status_valid",

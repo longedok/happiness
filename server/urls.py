@@ -23,7 +23,7 @@ admin.autodiscover()
 
 urlpatterns = [
     # Apps:
-    path('main/', include(main_urls, namespace='main')),
+    path('', include(main_urls, namespace='main')),
 
     # Health checks:
     path('health/', include(health_urls)),  # noqa: DJ05

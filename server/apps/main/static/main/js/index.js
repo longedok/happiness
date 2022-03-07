@@ -1,8 +1,3 @@
-/*window.addEventListener('load', (event) => {
-  Array.from(document.querySelectorAll('[data-toggle="tooltip"]'))
-      .forEach(toastNode => new bootstrap.Tooltip(toastNode))
-});*/
-
 let app = Vue.createApp({
   data() {
     let selectedTopic = {words: []};
@@ -22,6 +17,35 @@ let app = Vue.createApp({
       this.selectedTopic.selected = false;
       this.selectedTopic = topic;
       this.selectedTopic.selected = true;
+    },
+    setStatus(word, status, event) {
+      let method;
+      switch (status) {
+        case "new":
+          method = "set_new";
+          break;
+        case "learning":
+          method = "set_learning";
+          break;
+        case "learned":
+          method = "set_learned";
+          break;
+        default:
+          return;
+      };
+      const url = `/api/words/${word.id}/${method}/`;
+      fetch(url, {
+        method: "post",
+        headers: {
+          "x-csrftoken": csrfToken,
+          "content-type": "application/json"
+        }
+      }).then(res => {
+        if (res.ok) {
+          word.status = status === "new" ? null : status;
+        }
+        return res.json();
+      })
     }
   }
 });

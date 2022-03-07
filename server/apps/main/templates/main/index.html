@@ -27,10 +27,18 @@
       </td>
       <td class="words-table__controls">
         <div class="btn-group pull-right" role="group" aria-label="Статус слова">
-          <button type="button"
-                  class="btn btn-secondary text-dark bg-light bi-lightbulb-off"></button>
-          <button type="button" class="btn btn-secondary bi-lightbulb"></button>
-          <button type="button" class="btn btn-secondary bi-lightbulb-fill"></button>
+          <button type="button" class="btn btn-secondary bi-lightbulb-off"
+                  @click="setStatus(word, 'new', $event)"
+                  v-bind:class="{'text-dark bg-light': word.status === null}">
+          </button>
+          <button type="button" class="btn btn-secondary bi-lightbulb"
+                  @click="setStatus(word, 'learning', $event)"
+                  v-bind:class="{'bg-warning': word.status === 'learning'}">
+          </button>
+          <button type="button" class="btn btn-secondary bi-lightbulb-fill"
+                  @click="setStatus(word, 'learned', $event)"
+                  v-bind:class="{'bg-success': word.status === 'learned'}">
+          </button>
         </div>
       </td>
     </tr>
@@ -40,6 +48,7 @@
 {% endblock %}
 
 {% block inline_scripts %}
+  csrfToken = "{{ csrf_token }}";
   {% autoescape off %}
   topics = {{ topics }};
   {% endautoescape %}
