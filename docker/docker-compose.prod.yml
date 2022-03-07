@@ -46,6 +46,10 @@ services:
     expose:
       - 8000
 
+  celery_worker:
+    <<: *web
+    command: celery -A server worker -l INFO
+
 # This task is an example of how to extend existing ones:
 #   some_worker:
 #     <<: *web
