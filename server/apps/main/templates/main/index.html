@@ -20,6 +20,11 @@
           {{ word.word }}
         </span>
       </td>
+      <td>
+        <span class="text-secondary">
+          {{ word.transcription }}
+        </span>
+      </td>
       <td class="words-table__controls">
         <div class="btn-group pull-right" role="group" aria-label="Статус слова">
           <button type="button"
@@ -35,16 +40,7 @@
 {% endblock %}
 
 {% block inline_scripts %}
-  topics = [
-    {% for topic in topics %}
-    {
-      name: "{{ topic.name }}",
-      words: [
-        {% for word in topic.words.all %}
-        {word: "{{word.word}}", translation: "{{word.translation}}", status: "{{word.status}}"},
-        {% endfor %}
-      ]
-    },
-    {% endfor %}
-  ];
+  {% autoescape off %}
+  topics = {{ topics }};
+  {% endautoescape %}
 {% endblock %}

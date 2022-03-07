@@ -589,6 +589,18 @@ python-versions = ">=3.6,<4.0"
 typing_extensions = ">=3.6,<5"
 
 [[package]]
+name = "djangorestframework"
+version = "3.13.1"
+description = "Web APIs for Django, made easy."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+django = ">=2.2"
+pytz = "*"
+
+[[package]]
 name = "doc8"
 version = "0.10.1"
 description = "Style checker for Sphinx (or other) RST documentation"
@@ -2069,7 +2081,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9.9"
-content-hash = "6712fc47cae7f202271182e939799b1bc300ec0fcf7b5a51536fad99f7b12d52"
+content-hash = "7fa9c44c83bd4fc4a1fbd1f95ec8c9507468f7b0565a3aeaca293bddc711913b"
 
 [metadata.files]
 alabaster = [
@@ -2360,6 +2372,10 @@ django-stubs-ext = [
 django-test-migrations = [
     {file = "django-test-migrations-1.2.0.tar.gz", hash = "sha256:874884ff4e980583cd9f1c986bb9fbfe72b436e759be23004e4f52c26a15f363"},
     {file = "django_test_migrations-1.2.0-py3-none-any.whl", hash = "sha256:9e8b9b4364fef70dde10a5f85c5a75d447ca2189ec648325610fab1268daec97"},
+]
+djangorestframework = [
+    {file = "djangorestframework-3.13.1-py3-none-any.whl", hash = "sha256:24c4bf58ed7e85d1fe4ba250ab2da926d263cd57d64b03e8dcef0ac683f8b1aa"},
+    {file = "djangorestframework-3.13.1.tar.gz", hash = "sha256:0c33407ce23acc68eca2a6e46424b008c9c02eceb8cf18581921d0092bc1f2ee"},
 ]
 doc8 = [
     {file = "doc8-0.10.1-py3-none-any.whl", hash = "sha256:551a61df5915f0107e518d582fead47a0a56df7d4a9374feab955ea14dedea84"},

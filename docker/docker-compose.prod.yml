@@ -48,7 +48,7 @@ services:
 
   celery_worker:
     <<: *web
-    command: celery -A server worker -l INFO
+    command: celery -A server worker -l INFO --concurrency 2
 
 # This task is an example of how to extend existing ones:
 #   some_worker:
