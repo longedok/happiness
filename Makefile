@@ -5,7 +5,7 @@ push:
 	docker push longedok/happiness:latest
 
 upload:
-	docker build -f docker/django/Dockerfile -t longedok/happiness:latest .
+	DJANGO_ENV=production docker build -f docker/django/Dockerfile -t longedok/happiness:latest .
 	docker push longedok/happiness:latest
 
 update:
