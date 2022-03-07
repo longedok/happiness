@@ -29,3 +29,6 @@ shell:
 
 bash:
 	docker-compose run --rm web bash
+
+bash_prod:
+	docker-compose -f docker-compose.yml -f docker/docker-compose.prod.yml run --rm web bash
