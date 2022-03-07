@@ -26,4 +26,4 @@ class WordAdmin(admin.ModelAdmin[Topic]):
 class UserWordAdmin(admin.ModelAdmin[UserWord]):
     """Admin panel for `UserWord` model."""
 
-    list_display = ("word", "user")
+    list_display = ("word", "user", "status")
