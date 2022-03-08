@@ -6,14 +6,37 @@
   {% verbatim %}
   <ul class="list-container topics-list mb-1">
     <li v-for="topic in topics" class="topics-list__item"
-        @click="selectTopic(topic, $event)"
-        v-bind:class="{'topics-list__item_active text-white': topic.selected}">
+        @click="setTopicFilter(topic.id, $event)"
+        v-bind:class="{'topics-list__item_active text-white': topic.id === filter.topic}">
       {{ topic.name }}
     </li>
   </ul>
 
+  <div class="words-filter d-flex justify-content-end">
+    <div class="btn-group btn-group-sm"
+         role="group"
+         aria-label="Статус слова">
+      <button type="button"
+              class="btn btn-secondary bi-lightbulb-off"
+              @click="setStatusFilter('new', $event)"
+              v-bind:class="{'text-dark bg-light': filter.status === 'new'}">
+      </button>
+      <button type="button"
+              class="btn btn-secondary bi-lightbulb"
+              @click="setStatusFilter('learning', $event)"
+              v-bind:class="{'bg-warning': filter.status === 'learning'}">
+      </button>
+      <button type="button"
+              class="btn btn-secondary bi-lightbulb-fill"
+              @click="setStatusFilter('learned', $event)"
+              v-bind:class="{'bg-success': filter.status === 'learned'}">
+      </button>
+    </div>
+  </div>
+
   <table class="table words-table">
-    <tr class="align-middle" v-for="word in selectedTopic.words">
+    <tr class="align-middle"
+        v-for="word in words">
       <td>
         <span class="text-dark words-hint" v-tooltip data-toggle="tooltip"
               v-bind:title="word.translation">
@@ -29,15 +52,15 @@
         <div class="btn-group btn-group-sm pull-right" role="group"
              aria-label="Статус слова">
           <button type="button" class="btn btn-secondary bi-lightbulb-off"
-                  @click="setStatus(word, 'new', $event)"
-                  v-bind:class="{'text-dark bg-light': word.status === null}">
+                  @click="setWordStatus(word, 'new', $event)"
+                  v-bind:class="{'text-dark bg-light': word.status === 'new'}">
           </button>
           <button type="button" class="btn btn-secondary bi-lightbulb"
-                  @click="setStatus(word, 'learning', $event)"
+                  @click="setWordStatus(word, 'learning', $event)"
                   v-bind:class="{'bg-warning': word.status === 'learning'}">
           </button>
           <button type="button" class="btn btn-secondary bi-lightbulb-fill"
-                  @click="setStatus(word, 'learned', $event)"
+                  @click="setWordStatus(word, 'learned', $event)"
                   v-bind:class="{'bg-success': word.status === 'learned'}">
           </button>
         </div>
@@ -52,5 +75,6 @@
   csrfToken = "{{ csrf_token }}";
   {% autoescape off %}
   topics = {{ topics }};
+  words = {{ words }};
   {% endautoescape %}
 {% endblock %}

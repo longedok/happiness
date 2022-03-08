@@ -1,24 +1,58 @@
 let app = Vue.createApp({
+  beforeMount() {
+    this.topics = topics;
+
+    this.filter = {
+      "status": null,
+      "topic":  (topics.length > 0) ? topics[0].id : null,
+    };
+
+    this.filterWords();
+  },
   data() {
-    let selectedTopic = {words: []};
-
-    if (topics.length > 0) {
-      selectedTopic = topics[0];
-      selectedTopic.selected = true;
-    }
-
     return {
-      selectedTopic: selectedTopic,
-      topics: topics
+      topics: this.topics,
+      words: this.words,
+      filter: this.filter,
     }
   },
   methods: {
-    selectTopic(topic, event) {
-      this.selectedTopic.selected = false;
-      this.selectedTopic = topic;
-      this.selectedTopic.selected = true;
+    setTopicFilter(topicId, event) {
+      if (this.filter.topic === topicId) {
+        this.filter.topic = null;
+      } else {
+        this.filter.topic = topicId;
+      };
+
+      this.filterWords();
     },
-    setStatus(word, status, event) {
+    setStatusFilter(status, event) {
+      if (this.filter.status === status) {
+        this.filter.status = null;
+      } else {
+        this.filter.status = status;
+      };
+
+      this.filterWords();
+    },
+    filterWords() {
+      this.words = words.filter(
+        word => {
+          if (this.filter.status != null) {
+            if (word.status !== this.filter.status) {
+              return false;
+            }
+          };
+          if (this.filter.topic != null) {
+            if (word.topic !== this.filter.topic) {
+              return false;
+            }
+          };
+          return true;
+        }
+      );
+    },
+    setWordStatus(word, status, event) {
       let method;
       switch (status) {
         case "new":
@@ -41,7 +75,8 @@ let app = Vue.createApp({
         }
       }).then(res => {
         if (res.ok) {
-          word.status = status === "new" ? null : status;
+          word.status = status;
+          this.filterWords();
         }
       });
     }

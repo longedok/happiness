@@ -1,10 +1,32 @@
-from typing import Final
+from __future__ import annotations
+
+from typing import Final, TYPE_CHECKING
 
 from django.conf import settings
+from django.db.models import FilteredRelation, Q, F, Value
+from django.db.models.functions import Coalesce
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 
+if TYPE_CHECKING:
+    from django.contrib.auth.models import User
+
+
 _WORD_MAX_LENGTH: Final = 80
+
+
+class WordQuerySet(models.QuerySet):
+    def with_status(self, user: User | None = None) -> WordQuerySet:
+        new_status = Value("new")
+        if user:
+            return self.annotate(
+                user_words=FilteredRelation(
+                    "userword", condition=Q(userword__user=user)
+                ),
+                status=Coalesce(F("user_words__status"), new_status)
+            )
+        else:
+            return self.annotate(status=new_status)
 
 
 class Word(models.Model):
@@ -25,6 +47,8 @@ class Word(models.Model):
 
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
+
+    objects = WordQuerySet.as_manager()
 
     class Meta:
         verbose_name = _("Word")

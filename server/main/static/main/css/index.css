@@ -21,6 +21,33 @@
 }
 
 /*
+ * Main Menu
+ */
+
+.main-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+
+.main-menu__item {
+  cursor: pointer;
+  padding: 5px 15px;
+  border-right: 1px solid lightgray;
+}
+
+.main-menu__item:hover {
+  background-color: #f7f7f7;
+}
+
+.main-menu__item_active {
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+/*
  * Topics List
  */
 
@@ -51,6 +78,16 @@
 }
 
 /*
+ * Words fitler
+ */
+
+.words-filter {
+  padding: 7px 8px;
+  border-bottom: 1px solid lightgray;
+}
+
+
+/*
  * Words table
  */
 
@@ -74,32 +111,6 @@
   --bs-bg-opacity: 1;
 }
 
-/*
- * Main Menu
- */
-
-.main-menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-}
-
-.main-menu__item {
-  cursor: pointer;
-  padding: 5px 15px;
-  border-right: 1px solid lightgray;
-}
-
-.main-menu__item:hover {
-  background-color: #f7f7f7;
-}
-
-.main-menu__item_active {
-  background-color: #f7f7f7;
-  font-weight: bold;
-}
 
 /*
  * Vue.js utils

@@ -17,7 +17,9 @@ class WordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Word
-        fields = ("id", "word", "translation", "transcription", "date", "status")
+        fields = (
+            "id", "word", "translation", "transcription", "date", "status", "topic"
+        )
 
 
 class WordViewSet(GenericViewSet):
