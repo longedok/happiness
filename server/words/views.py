@@ -14,7 +14,7 @@ def words(request: HttpRequest) -> HttpResponse:
     else:
         words_qs = Word.objects.with_status()
 
-    words_qs = words_qs.order_by("id")
+    words_qs = words_qs.order_by("-id")
 
     topic_serializer = TopicSerializer(Topic.objects.order_by("id"), many=True)
     words_serializer = WordSerializer(words_qs, many=True)
