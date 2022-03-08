@@ -26,7 +26,8 @@
         </span>
       </td>
       <td class="words-table__controls">
-        <div class="btn-group pull-right" role="group" aria-label="Статус слова">
+        <div class="btn-group btn-group-sm pull-right" role="group"
+             aria-label="Статус слова">
           <button type="button" class="btn btn-secondary bi-lightbulb-off"
                   @click="setStatus(word, 'new', $event)"
                   v-bind:class="{'text-dark bg-light': word.status === null}">
