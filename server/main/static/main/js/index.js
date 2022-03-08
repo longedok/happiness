@@ -33,8 +33,7 @@ let app = Vue.createApp({
         default:
           return;
       };
-      const url = `/api/words/${word.id}/${method}/`;
-      fetch(url, {
+      fetch(`/api/words/${word.id}/${method}/`, {
         method: "post",
         headers: {
           "x-csrftoken": csrfToken,
@@ -44,8 +43,7 @@ let app = Vue.createApp({
         if (res.ok) {
           word.status = status === "new" ? null : status;
         }
-        return res.json();
-      })
+      });
     }
   }
 });
