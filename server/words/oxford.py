@@ -49,7 +49,7 @@ def _first(items: Iterable) -> Any:
 
 def fetch_word(word_id: str) -> dict[str, Any] | None:
     try:
-        data = _get_entry(word_id)
+        data = _get_entry(word_id.lower())
     except OxfordAPIError as exc:
         logger.exception(exc)
         return

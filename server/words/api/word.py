@@ -8,8 +8,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from server.apps.words.models import UserWord
-from server.apps.words.models import Word
+from server.words.models import UserWord
+from server.words.models import Word
 
 
 class WordSerializer(serializers.ModelSerializer):

@@ -1,7 +1,7 @@
 from hypothesis import given
 from hypothesis.extra import django
 
-from server.apps.main.models import BlogPost
+from main import BlogPost
 
 
 class TestBlogPost(django.TestCase):

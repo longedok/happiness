@@ -1,18 +1,20 @@
 import json
 
+from django.db.models import Prefetch, Q, FilteredRelation, F
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.db.models import Prefetch, F, Max, Q
 
-from server.apps.words.models import Word
-from server.apps.words.api.topic import TopicSerializer
-from server.apps.words.models import Topic
+from .api.topic import TopicSerializer
+from .models import Word, Topic
 
 
-def index(request: HttpRequest) -> HttpResponse:
+def words(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
         words_qs = Word.objects.annotate(
-            status=Max("userword__status", filter=Q(userword__user=request.user))
+            user_words=FilteredRelation(
+                "userword", condition=Q(userword__user=request.user)
+            ),
+            status=F("user_words__status")
         )
     else:
         words_qs = Word.objects.annotate(status=None).all()

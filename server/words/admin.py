@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
-from server.apps.words.models import Word, Topic, UserWord
+from server.words.models import Word, Topic, UserWord
 
 
 @admin.register(Word)

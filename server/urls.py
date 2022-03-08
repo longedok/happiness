@@ -16,14 +16,14 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from health_check import urls as health_urls
 
-from server.apps.main import urls as main_urls
-from server.apps.main.views import index
+from server.words.views import words
 
 admin.autodiscover()
 
 urlpatterns = [
     # Apps:
-    path('', include(main_urls, namespace='main')),
+    path('', include("server.words.urls.urls")),
+    path('api/', include("server.words.urls.api")),
 
     # Health checks:
     path('health/', include(health_urls)),  # noqa: DJ05
@@ -43,7 +43,7 @@ urlpatterns = [
     )),
 
     # It is a good practice to have explicit index view:
-    path('', index, name='index'),
+    path('', words, name='index'),
 ]
 
 if settings.DEBUG:  # pragma: no cover

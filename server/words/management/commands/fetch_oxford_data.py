@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-from typing import Final
 import operator
 import time
 from functools import reduce
+from typing import Final
 
 from django.core.management.base import BaseCommand
 from django.db.models import Q
-
-from server.apps.words.logic.oxford import update_oxford_data
-from server.apps.words.models import Word
-
+from server.words.logic.oxford import update_oxford_data
+from server.words.models import Word
 
 _FETCH_DELAY_SECONDS: Final[int] = 1
 

@@ -70,7 +70,7 @@ services:
 
   celery_worker:
     <<: *web
-    command: celery -A server worker -l INFO  --concurrency 2
+    command: celery -A server worker -l INFO --concurrency 2
 
 networks:
   # Network for your internals, use it by default:
