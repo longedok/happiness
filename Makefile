@@ -1,3 +1,6 @@
+up:
+	docker-compose up -d
+
 build:
 	docker build -f docker/django/Dockerfile -t longedok/happiness:latest .
 

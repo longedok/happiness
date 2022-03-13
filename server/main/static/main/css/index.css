@@ -113,6 +113,35 @@
 
 
 /*
+ * Scores
+ */
+
+.scores-header {
+  text-align: center;
+}
+
+/*
+ * Scoreboard
+ */
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18pt;
+}
+
+.score-divider {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.score-item__score {
+  text-align: center;
+}
+
+/*
  * Vue.js utils
  */
 

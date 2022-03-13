@@ -34,8 +34,16 @@
     <div class="col">
       <h2 class="title mt-3 mb-3">Проект &laquo;Счастье&raquo;</h2>
       <ul class="list-container main-menu">
-        <li class="main-menu__item main-menu__item_active">Тренажёр слов</li>
-        <li class="main-menu__item">Счёт ужинов</li>
+        <a class="link-dark" href="{% url 'words' %}">
+          <li class="main-menu__item {% if page == 'words' %}main-menu__item_active{% endif %}">
+            Тренажёр слов
+          </li>
+        </a>
+        <a class="link-dark" href="{% url 'scores' %}">
+          <li class="main-menu__item {% if page == 'scores' %}main-menu__item_active{% endif %}">
+            Счётчики
+          </li>
+        </a>
       </ul>
     </div>
   </div>
@@ -57,7 +65,6 @@
 </script>
 
 {% block scripts %}
-<script src="{% static 'main/js/index.js' %}"></script>
 {% endblock %}
 </body>
 </html>

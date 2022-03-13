@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
-from server.words.models import Word, Topic, UserWord
+from server.words.models import Word, Topic, UserWord, Score, Scoreboard
 
 
 @admin.register(Word)
@@ -27,3 +27,13 @@ class UserWordAdmin(admin.ModelAdmin[UserWord]):
     """Admin panel for `UserWord` model."""
 
     list_display = ("word", "user", "status")
+
+
+@admin.register(Score)
+class ScoreAdmin(admin.ModelAdmin[Score]):
+    list_display = ("user", "score", "date", "description")
+
+
+@admin.register(Scoreboard)
+class ScoreboardAdmin(admin.ModelAdmin[Scoreboard]):
+    list_display = ("name", "user_1", "user_2", "description")

@@ -72,13 +72,9 @@
 {% endblock %}
 
 {% block inline_scripts %}
-  csrfToken = "{{ csrf_token }}";
-  {% autoescape off %}
-  topics = {{ topics }};
-  words = {{ words }};
-  {% endautoescape %}
-{% endblock %}
-
-{% block scripts %}
-<script src="{% static 'main/js/index.js' %}"></script>
+csrfToken = "{{ csrf_token }}";
+{% autoescape off %}
+topics = {{ topics }};
+words = {{ words }};
+{% endautoescape %}
 {% endblock %}

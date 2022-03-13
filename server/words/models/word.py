@@ -30,13 +30,13 @@ class WordQuerySet(models.QuerySet):
 
 
 class Word(models.Model):
-    word = models.CharField(_("word"), max_length=_WORD_MAX_LENGTH)
-    translation = models.CharField(_("translation"), max_length=_WORD_MAX_LENGTH)
-    date = models.DateField(_("date"), auto_now=True)
+    word = models.CharField(_("Word"), max_length=_WORD_MAX_LENGTH)
+    translation = models.CharField(_("Translation"), max_length=_WORD_MAX_LENGTH)
+    date = models.DateField(_("Date"), auto_now=True)
     transcription = models.CharField(
-        _("transcription"), blank=True, max_length=_WORD_MAX_LENGTH
+        _("Transcription"), blank=True, max_length=_WORD_MAX_LENGTH
     )
-    oxford_data = models.JSONField(_("oxford data"), default=dict, blank=True)
+    oxford_data = models.JSONField(_("Oxford data"), default=dict, blank=True)
 
     user = models.ManyToManyField(to=settings.AUTH_USER_MODEL, through="words.UserWord")
 
@@ -45,8 +45,8 @@ class Word(models.Model):
         related_name="words"
     )
 
-    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
-    updated_at = models.DateTimeField(_("updated at"), auto_now=True)
+    created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("Updated at"), auto_now=True)
 
     objects = WordQuerySet.as_manager()
 
