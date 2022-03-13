@@ -68,19 +68,6 @@ let app = Vue.createApp({
           this.words.splice(i, 0, {date: this.words[i].date_display, dateRow: true});
         };
       };
-
-//      const groups = [];
-//      let currentGroup;
-//      let prevDate;
-//      for (const word of this.words) {
-//        if (word.date != prevDate) {
-//          prevDate = word.date;
-//          currentGroup = [];
-//          groups.push(currentGroup);
-//        }
-//        currentGroup.push(word);
-//      }
-//      this.groups = groups;
     },
     setWordStatus(word, status, event) {
       let method;
