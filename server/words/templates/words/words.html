@@ -44,7 +44,12 @@
         </span>
       </td>
       <td>
-        <span class="text-secondary">
+        <button
+          class="btn btn-secondary btn-sm bi-play"
+          @click="playFile(word)"
+          v-if="word.audio">
+        </button>
+        <span class="text-secondary ms-2">
           {{ word.transcription }}
         </span>
       </td>
@@ -67,6 +72,12 @@
       </td>
     </tr>
   </table>
+
+  <div>
+    <audio v-bind:id="'player-' + word.id" v-for="word in allWords">
+      <source v-bind:src="word.audio" type="audio/mpeg">
+    </audio>
+  </div>
   {% endverbatim %}
 </div>
 {% endblock %}

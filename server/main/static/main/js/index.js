@@ -1,6 +1,7 @@
 let app = Vue.createApp({
   beforeMount() {
     this.topics = topics;
+    this.allWords = words;
 
     this.filter = {
       "status": null,
@@ -14,9 +15,17 @@ let app = Vue.createApp({
       topics: this.topics,
       words: this.words,
       filter: this.filter,
+      allWords: this.allWords,
     }
   },
   methods: {
+    playFile(word) {
+      let player = document.getElementById(`player-${word.id}`);
+      console.log(player);
+      if (player !== undefined) {
+        player.play()
+      }
+    },
     setTopicFilter(topicId, event) {
       if (this.filter.topic === topicId) {
         this.filter.topic = null;

@@ -14,12 +14,17 @@ from server.words.models import Word
 
 class WordSerializer(serializers.ModelSerializer):
     status = serializers.CharField()
+    audio = serializers.SerializerMethodField()
 
     class Meta:
         model = Word
         fields = (
-            "id", "word", "translation", "transcription", "date", "status", "topic"
+            "id", "word", "translation", "transcription", "date", "status", "topic",
+            "audio"
         )
+
+    def get_audio(self, obj):
+        return obj.oxford_data.get("audio_file")
 
 
 class WordViewSet(GenericViewSet):
