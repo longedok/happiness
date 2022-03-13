@@ -4,8 +4,8 @@
 {% block content %}
 <div id="scores" v-cloak>
   {% verbatim %}
-  <div class="scoreboard-container" v-for="board in scoreboards">
-    <h3 class="scores-header mt-3">{{ board.name }}</h3>
+  <div class="scoreboard-container mt-3" v-for="board in scoreboards">
+    <h3 class="scores-header">{{ board.name }}</h3>
 
     <div class="scoreboard">
       <div class="score-item">
