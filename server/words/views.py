@@ -36,6 +36,7 @@ def words(request: HttpRequest) -> HttpResponse:
 
 
 def scores(request: HttpRequest) -> HttpResponse:
+    user_id = request.user.id if request.user.is_authenticated else None
     scoreboards = (
         Scoreboard.objects
         .prefetch_related("scores")
@@ -49,6 +50,9 @@ def scores(request: HttpRequest) -> HttpResponse:
             user_2_score=Coalesce(
                 Sum("scores__score", filter=Q(scores__user=F("user_2"))), 0
             )
+        )
+        .filter(
+            Q(user_1=user_id) | Q(user_2=user_id)
         )
         .only(
             "id",
