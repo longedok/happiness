@@ -35,13 +35,17 @@
   </div>
 
   <table class="table words-table">
-    <tr class="align-middle"
-        v-for="word in words">
+    <tr
+      class="align-middle"
+      v-for="word in words"
+      v-bind:class="{'words-table__date-row': word.dateRow}"
+    >
       <td>
         <span class="text-dark words-hint" v-tooltip data-toggle="tooltip"
               v-bind:title="word.translation">
           {{ word.word }}
         </span>
+        <strong v-if="word.dateRow">{{ word.date }}</strong>
       </td>
       <td>
         <button
@@ -54,7 +58,7 @@
         </span>
       </td>
       <td class="words-table__controls">
-        <div class="btn-group btn-group-sm pull-right" role="group"
+        <div class="btn-group btn-group-sm pull-right" role="group" v-if="!word.dateRow"
              aria-label="Статус слова">
           <button type="button" class="btn btn-secondary bi-lightbulb-off"
                   @click="setWordStatus(word, 'new', $event)"
@@ -91,5 +95,5 @@ words = {{ words }};
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'main/js/index.js' %}"></script>
+<script src="{% static 'main/js/words.js' %}"></script>
 {% endblock %}

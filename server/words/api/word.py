@@ -15,12 +15,13 @@ from server.words.models import Word
 class WordSerializer(serializers.ModelSerializer):
     status = serializers.CharField()
     audio = serializers.SerializerMethodField()
+    date_display = serializers.DateField(format="%-d %b %Y", source="date")
 
     class Meta:
         model = Word
         fields = (
             "id", "word", "translation", "transcription", "date", "status", "topic",
-            "audio"
+            "audio", "date_display",
         )
 
     def get_audio(self, obj):

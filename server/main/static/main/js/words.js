@@ -16,12 +16,12 @@ let app = Vue.createApp({
       words: this.words,
       filter: this.filter,
       allWords: this.allWords,
+      groups: this.groups,
     }
   },
   methods: {
     playFile(word) {
       let player = document.getElementById(`player-${word.id}`);
-      console.log(player);
       if (player !== undefined) {
         player.play()
       }
@@ -60,6 +60,27 @@ let app = Vue.createApp({
           return true;
         }
       );
+
+      let prevDate;
+      for (let i = 0; i < this.words.length; i++) {
+        if (this.words[i].date != prevDate) {
+          prevDate = this.words[i].date;
+          this.words.splice(i, 0, {date: this.words[i].date_display, dateRow: true});
+        };
+      };
+
+//      const groups = [];
+//      let currentGroup;
+//      let prevDate;
+//      for (const word of this.words) {
+//        if (word.date != prevDate) {
+//          prevDate = word.date;
+//          currentGroup = [];
+//          groups.push(currentGroup);
+//        }
+//        currentGroup.push(word);
+//      }
+//      this.groups = groups;
     },
     setWordStatus(word, status, event) {
       let method;
