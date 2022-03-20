@@ -4,6 +4,7 @@
 
 .title {
   text-align: center;
+  clear: both;
 }
 
 .header {
@@ -158,6 +159,29 @@
 .score-item__score {
   text-align: center;
   line-height: 40pt;
+}
+
+
+/*
+ * Login/Signup
+ */
+
+.signup-container {
+  float: right;
+}
+
+.signup-menu {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0;
+}
+
+.signup-menu__item {
+  padding: 0 5px;
+}
+
+.signup-menu__item:first-child {
+  border-right: 1px solid black;
 }
 
 /*

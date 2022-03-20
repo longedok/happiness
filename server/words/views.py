@@ -5,11 +5,15 @@ from django.db.models import Sum, F, Q, Prefetch
 from django.db.models.functions import Coalesce
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
+from django.contrib.auth import views as auth_views
 
 from .api.scoreboard import ScoreboardSerializer
 from .api.topic import TopicSerializer
 from .api.word import WordSerializer
 from .models import Word, Topic, Scoreboard, Score
+from .forms import UserCreationForm, AuthenticationForm
 
 logger = logging.getLogger(__name__)
 
@@ -74,3 +78,19 @@ def scores(request: HttpRequest) -> HttpResponse:
     }
 
     return render(request, 'words/scores.html', context=context)
+
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("signup-success")
+    template_name = "words/signup.html"
+
+
+class SignUpSuccessView(generic.TemplateView):
+    template_name = "words/signup_success.html"
+
+
+class LogInView(auth_views.LoginView):
+    form_class = AuthenticationForm
+    success_url = reverse_lazy("words")
+    template_name = "words/login.html"
