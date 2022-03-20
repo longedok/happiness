@@ -1,7 +1,7 @@
 import json
 import logging
 
-from django.db.models import Sum, F, Q, FilteredRelation, Max
+from django.db.models import Sum, F, Q, Prefetch
 from django.db.models.functions import Coalesce
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
@@ -9,8 +9,7 @@ from django.shortcuts import render
 from .api.scoreboard import ScoreboardSerializer
 from .api.topic import TopicSerializer
 from .api.word import WordSerializer
-from .models import Word, Topic, Scoreboard
-
+from .models import Word, Topic, Scoreboard, Score
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +38,9 @@ def scores(request: HttpRequest) -> HttpResponse:
     user_id = request.user.id if request.user.is_authenticated else None
     scoreboards = (
         Scoreboard.objects
-        .prefetch_related("scores")
+        .prefetch_related(
+            Prefetch("scores", queryset=Score.objects.select_related("user"))
+        )
         .select_related("user_1", "user_2")
         .annotate(
             user_1_score=Coalesce(
@@ -57,6 +58,7 @@ def scores(request: HttpRequest) -> HttpResponse:
         .only(
             "id",
             "name",
+            "user_title",
             "user_1__first_name",
             "user_1__username",
             "user_2__first_name",

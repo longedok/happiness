@@ -27,23 +27,17 @@
       <thead>
       <tr>
         <th>Дата</th>
-        <th>Исполнитель</th>
+        <th>{{ board.user_title || 'Исполнитель' }}</th>
         <th>Количество</th>
         <th>Описание</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>20 марта</td>
-        <td>Маша</td>
-        <td>1</td>
-        <td>Приготовила макароны</td>
-      </tr>
-      <tr>
-        <td>19 марта</td>
-        <td>Женя</td>
-        <td>1</td>
-        <td>Приготовил макары</td>
+      <tr v-for="score in board.scores">
+        <td>{{ score.date_display }}</td>
+        <td>{{ score.user.first_name }}</td>
+        <td>{{ score.score }}</td>
+        <td>{{ score.description }}</td>
       </tr>
       </tbody>
     </table>

@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 _NAME_MAX_LENGTH: Final[int] = 100
+_USER_TITLE_MAX_LENGTH: Final[int] = 100
 _DESCRIPTION_MAX_LENGTH: Final[int] = 255
 
 
@@ -26,6 +27,12 @@ class Scoreboard(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="+",
+    )
+
+    user_title = models.CharField(
+        _("User title"),
+        max_length=_USER_TITLE_MAX_LENGTH,
+        blank=True,
     )
 
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
