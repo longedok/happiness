@@ -116,28 +116,48 @@
  */
 
 .scores-header {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 /*
  * Scoreboard
  */
 
+.scoreboard-container {
+  margin-top: 65px;
+}
+
+.scoreboard-container:first-child {
+  margin-top: 30px;
+}
+
 .scoreboard {
   display: flex;
   justify-content: center;
   gap: 12px;
   font-size: 18pt;
+  margin-bottom: 25px;
 }
 
-.score-divider {
+.score-item_divider {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
+.score-item {
+  font-size: 45pt;
+  font-weight: bold;
+}
+
+.score-item__name {
+  font-size: 22pt;
+  font-weight: normal;
+}
+
 .score-item__score {
   text-align: center;
+  line-height: 40pt;
 }
 
 /*

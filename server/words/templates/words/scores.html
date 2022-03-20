@@ -4,7 +4,7 @@
 {% block content %}
 <div id="scores" v-cloak>
   {% verbatim %}
-  <div class="scoreboard-container mt-3" v-for="board in scoreboards">
+  <div class="scoreboard-container" v-for="board in scoreboards">
     <h3 class="scores-header">{{ board.name }}</h3>
 
     <div class="scoreboard">
@@ -13,8 +13,8 @@
         <div class="score-item__score">{{ board.user_1_score }}</div>
       </div>
 
-      <div class="score-divider">
-        <span class="score-divider__colon">:</span>
+      <div class="score-item score-item_divider">
+        <span class="score-item__score">:</span>
       </div>
 
       <div class="score-item">
