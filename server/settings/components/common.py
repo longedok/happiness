@@ -221,3 +221,7 @@ REDIS_PORT = config("REDIS_PORT", cast=int, default=6379)
 CELERY_REDIS_DB = config("CELERY_REDIS_DB", cast=int, default=1)
 
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}"
+
+# Auth settings
+LOGIN_REDIRECT_URL = "words"
+LOGOUT_REDIRECT_URL = "words"

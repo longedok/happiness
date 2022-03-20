@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Регистрация | {{ block.super }}{% endblock %}
+
+{% block content %}
+<form method="post" class="mt-4">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+  <div class="alert alert-danger">
+    <ul class="list-container">
+      {% for error in form.non_field_errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% for field in form %}
+  <div class="form-group">
+    {{ field.label_tag }}
+    {{ field }}
+    {% if field.help_text %}
+    <small class="form-text text-muted">
+      {{ field.help_text|safe }}
+    </small>
+    {% endif %}
+    {% for error in field.errors %}
+    <div class="invalid-feedback">
+      {{ error }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  <button class="btn btn-primary mt-3" type="submit">Регистрация</button>
+</form>
+{% endblock %}

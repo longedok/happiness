@@ -26,12 +26,27 @@
   <link rel="icon" type="image/png" sizes="32x32"
         href="{% static 'main/images/favicon-32x32.png' %}">
 
-  <title>{% block title %}Happiness Project{% endblock %}</title>
+  <title>{% block title %}Проект Счастье{% endblock %}</title>
 </head>
 <body>
 <div id="app" class="container">
   <div class="row mb-1">
     <div class="col">
+      <div class="signup-container">
+        {% if request.user.is_authenticated %}
+          Добро пожаловать, {{ user.first_name|default:user.username }}!
+          <a class="link-dark" href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+        <ul class="list-container signup-menu">
+          <a class="link-dark signup-menu__item" href="{% url 'signup' %}">
+            <li>Регистрация</li>
+          </a>
+          <a class="link-dark signup-menu__item" href="{% url 'login' %}">
+            <li>Вход</li>
+          </a>
+        </ul>
+        {% endif %}
+      </div>
       <h2 class="title mt-3 mb-3">Проект &laquo;Счастье&raquo;</h2>
       <ul class="list-container main-menu">
         <a class="link-dark" href="{% url 'words' %}">
