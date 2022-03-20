@@ -5,7 +5,7 @@ let app = Vue.createApp({
 
     this.filter = {
       "status": null,
-      "topic":  (topics.length > 0) ? topics[0].id : null,
+      "topic":  null,
     };
 
     this.filterWords();
