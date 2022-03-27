@@ -37,6 +37,11 @@ deploy_full:
 	docker pull longedok/happiness:latest
 	docker-compose $(prod_compose) up -d
 
+deploy_full_force:
+	pass show test
+	docker pull longedok/happiness:latest
+	docker-compose $(prod_compose) up -d --force-recreate
+
 restart_web:
 	docker-compose up -d --no-deps --force-recreate web
 
