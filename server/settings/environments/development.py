@@ -110,6 +110,8 @@ NPLUSONE_WHITELIST = [
 # Set of badly named migrations to ignore:
 DTM_IGNORED_MIGRATIONS = frozenset((
     ('axes', '*'),
+    ("core", "0003_auto_20220307_2258"),
+    ("core", "0005_auto_20220313_1930"),
 ))
 
 

@@ -1,0 +1,59 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="scores" v-cloak>
+  {% verbatim %}
+  <div class="scoreboard-container" v-for="board in scoreboards">
+    <h3 class="scores-header">{{ board.name }}</h3>
+
+    <div class="scoreboard">
+      <div class="score-item">
+        <div class="score-item__name">{{ board.user_1.first_name }}</div>
+        <div class="score-item__score">{{ board.user_1_score }}</div>
+      </div>
+
+      <div class="score-item score-item_divider">
+        <span class="score-item__score">:</span>
+      </div>
+
+      <div class="score-item">
+        <div class="score-item__name">{{ board.user_2.first_name }}</div>
+        <div class="score-item__score">{{ board.user_2_score }}</div>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Дата</th>
+        <th>{{ board.user_title || 'Исполнитель' }}</th>
+        <th>Количество</th>
+        <th>Описание</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="score in board.scores">
+        <td>{{ score.date_display }}</td>
+        <td>{{ score.user.first_name }}</td>
+        <td>{{ score.score }}</td>
+        <td>{{ score.description }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {% endverbatim %}
+</div>
+{% endblock %}
+
+{% block inline_scripts %}
+csrfToken = "{{ csrf_token }}";
+{% autoescape off %}
+scoreboards = {{ scoreboards }};
+{% endautoescape %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'core/js/scores.js' %}"></script>
+{% endblock %}

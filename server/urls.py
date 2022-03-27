@@ -16,14 +16,14 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from health_check import urls as health_urls
 
-from server.words.views import words
+from server.core.views import words
 
 admin.autodiscover()
 
 urlpatterns = [
     # Apps:
-    path('', include("server.words.urls.urls")),
-    path('api/', include("server.words.urls.api")),
+    path('', include("server.core.urls.urls")),
+    path('api/', include("server.core.urls.api")),
 
     # Health checks:
     path('health/', include(health_urls)),  # noqa: DJ05
