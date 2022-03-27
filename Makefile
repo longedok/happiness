@@ -1,10 +1,14 @@
 prod_compose = -f docker-compose.yml -f docker/docker-compose.prod.yml
+svc = web
 
 up:
 	docker-compose up -d
 
 down:
 	docker-compose stop
+
+log:
+	docker-compose $(prod_compose) logs --tail=20 -f $(svc)
 
 web_log:
 	docker-compose logs --tail=20 -f web
