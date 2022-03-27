@@ -78,7 +78,7 @@
   </table>
 
   <div>
-    <audio v-bind:id="'player-' + word.id" v-for="word in allWords">
+    <audio v-bind:id="'player-' + word.id" v-for="word in allWords" preload="none">
       <source v-bind:src="word.audio" type="audio/mpeg">
     </audio>
   </div>
