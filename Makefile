@@ -9,6 +9,9 @@ down:
 web_log:
 	docker-compose logs --tail=20 -f web
 
+caddy_log:
+	docker-compose $(prod_compose) logs --tail=20 -f caddy
+
 build:
 	docker build -f docker/django/Dockerfile -t longedok/happiness:latest .
 
