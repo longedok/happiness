@@ -45,6 +45,12 @@ deploy_full_force:
 	docker pull longedok/happiness:latest
 	docker-compose $(prod_compose) up -d --force-recreate
 
+startup:
+	docker-compose $(prod_compose) up -d
+
+shutdown:
+	docker-compose $(prod_compose) stop
+
 restart_web:
 	docker-compose up -d --no-deps --force-recreate web
 
@@ -62,3 +68,6 @@ psql:
 
 psql_prod:
 	docker-compose $(prod_compose) run --rm db psql -h db -d happiness -U happiness
+
+pass:
+	pass show test
