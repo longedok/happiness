@@ -48,6 +48,7 @@ INSTALLED_APPS: Tuple[str, ...] = (
     # 'health_check.storage',
 
     "rest_framework",
+    "admin_reorder",
 )
 
 MIDDLEWARE: Tuple[str, ...] = (
@@ -71,6 +72,8 @@ MIDDLEWARE: Tuple[str, ...] = (
 
     # Django HTTP Referrer Policy:
     'django_http_referrer_policy.middleware.ReferrerPolicyMiddleware',
+
+    "admin_reorder.middleware.ModelAdminReorder",
 )
 
 ROOT_URLCONF = 'server.urls'
@@ -221,6 +224,24 @@ CELERY_REDIS_DB = config("CELERY_REDIS_DB", cast=int, default=1)
 
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}"
 
+
 # Auth settings
 LOGIN_REDIRECT_URL = "words"
 LOGOUT_REDIRECT_URL = "words"
+
+
+# Admin Reorder
+ADMIN_REORDER = (
+    {
+        "app": "core",
+        "label": "Words",
+        "models": ["core.Word", "core.Topic", "core.UserWord"],
+    },
+    {
+        "app": "core",
+        "label": "Scores",
+        "models": ["core.Score", "core.Scoreboard"],
+    },
+    "auth",
+    "axes",
+)

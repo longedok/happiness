@@ -19,6 +19,7 @@ from health_check import urls as health_urls
 from server.core.views import words
 
 admin.autodiscover()
+admin.site.enable_nav_sidebar = False
 
 urlpatterns = [
     # Apps:

@@ -522,6 +522,17 @@ toml = ">=0.10.2"
 test = ["tox (>=3.15.2)", "mysqlclient (>=1.4.6,<2)", "psycopg2-binary (>=2.8.5,<2.9)", "django-add-default-value (>=0.4.0)", "coverage (>=5.5)"]
 
 [[package]]
+name = "django-modeladmin-reorder"
+version = "0.3.1"
+description = "Custom ordering for the apps and models in the admin app."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
 name = "django-permissions-policy"
 version = "4.8.0"
 description = "Set the draft security HTTP header Permissions-Policy (previously Feature-Policy) on your Django app."
@@ -2081,7 +2092,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9.9"
-content-hash = "7fa9c44c83bd4fc4a1fbd1f95ec8c9507468f7b0565a3aeaca293bddc711913b"
+content-hash = "7e9cd6d1476700a14d30428eb511173ec5319b764ac1653f39708070f3525783"
 
 [metadata.files]
 alabaster = [
@@ -2349,6 +2360,9 @@ django-ipware = [
 django-migration-linter = [
     {file = "django-migration-linter-4.0.0.tar.gz", hash = "sha256:eb2e73494871aec763e8e32a98e667c86a289ca7046fd14a021c0b9ef445001a"},
     {file = "django_migration_linter-4.0.0-py2.py3-none-any.whl", hash = "sha256:e5091882ce4212d557d001a5dacabd357d2b89e9e621ba69379cbae8773aca36"},
+]
+django-modeladmin-reorder = [
+    {file = "django-modeladmin-reorder-0.3.1.tar.gz", hash = "sha256:bf42d0dcd184b796b4d6d988c4b4cea7914adfc4430dd9978a8a0199051f189f"},
 ]
 django-permissions-policy = [
     {file = "django-permissions-policy-4.8.0.tar.gz", hash = "sha256:0b4a98132691f583fb20043af9ac8c698f7b6b418a93e44caf8e686687eac490"},
