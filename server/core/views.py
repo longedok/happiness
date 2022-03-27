@@ -43,7 +43,10 @@ def scores(request: HttpRequest) -> HttpResponse:
     scoreboards = (
         Scoreboard.objects
         .prefetch_related(
-            Prefetch("scores", queryset=Score.objects.select_related("user"))
+            Prefetch(
+                "scores",
+                queryset=Score.objects.select_related("user").order_by("-date")
+            )
         )
         .select_related("user_1", "user_2")
         .annotate(
