@@ -55,13 +55,10 @@ services:
     expose:
       - 8000
     logging:
-      driver: gcplogs
+      driver: fluentd
       options:
-        gcp-project: "telegram-bot-303420"
-        gcp-meta-name: "hobby"
-        gcp-meta-zone: "us-east1-b"
-        gcp-meta-id: "8272387206043661921"
-        labels: "web"
+        fluentd-address: "localhost:24225"
+        tag: "caddy"
 
   celery_worker:
     <<: *web
