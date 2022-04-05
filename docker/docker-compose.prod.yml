@@ -31,7 +31,7 @@ services:
         gcp-project: "telegram-bot-303420"
         gcp-meta-name: "hobby"
         gcp-meta-zone: "us-east1-b"
-        gcp-meta-id: 8272387206043661921
+        gcp-meta-id: "8272387206043661921"
         labels: "caddy"
 
   web:
@@ -54,26 +54,10 @@ services:
       - proxynet
     expose:
       - 8000
-    logging:
-      driver: gcp-logs
-      options:
-        gcp-project: "telegram-bot-303420"
-        gcp-meta-name: "hobby"
-        gcp-meta-zone: "us-east1-b"
-        gcp-meta-id: 8272387206043661921
-        labels: "web"
 
   celery_worker:
     <<: *web
     command: celery -A server worker -l INFO --concurrency 2
-    logging:
-      driver: gcp-logs
-      options:
-        gcp-project: "telegram-bot-303420"
-        gcp-meta-name: "hobby"
-        gcp-meta-zone: "us-east1-b"
-        gcp-meta-id: 8272387206043661921
-        labels: "celery"
 
 # This task is an example of how to extend existing ones:
 #   some_worker:
