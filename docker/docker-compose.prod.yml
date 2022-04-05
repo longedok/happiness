@@ -26,7 +26,7 @@ services:
     networks:
       - proxynet
     logging:
-      driver: gcp-logs
+      driver: gcplogs
       options:
         gcp-project: "telegram-bot-303420"
         gcp-meta-name: "hobby"
