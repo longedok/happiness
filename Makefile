@@ -76,5 +76,8 @@ psql_prod:
 backup:
 	./backupdb.sh
 
+ssh:
+	gcloud compute ssh --project=telegram-bot-303420 --zone=us-east1-b hobby
+
 pass:
 	pass show test
