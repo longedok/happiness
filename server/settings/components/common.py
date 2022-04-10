@@ -23,7 +23,8 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 INSTALLED_APPS: Tuple[str, ...] = (
     # Your apps go here:
-    'server.core.apps.CoreConfig',
+    'server.core',
+    'server.users',
 
     # Default django apps:
     'django.contrib.auth',
@@ -50,6 +51,8 @@ INSTALLED_APPS: Tuple[str, ...] = (
     "rest_framework",
     "admin_reorder",
 )
+
+AUTH_USER_MODEL = "users.User"
 
 MIDDLEWARE: Tuple[str, ...] = (
     # Content Security Policy:
@@ -242,6 +245,7 @@ ADMIN_REORDER = (
         "label": "Scores",
         "models": ["core.Score", "core.Scoreboard"],
     },
+    "users",
     "auth",
     "axes",
 )
