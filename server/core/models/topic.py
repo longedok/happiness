@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import Final, TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
+from django.db import models
 from django.db.models import Prefetch
 from django.utils.translation import gettext_lazy as _
-from django.db import models
 
 if TYPE_CHECKING:
     from .word import WordQuerySet
@@ -14,7 +14,7 @@ _TOPIC_NAME_MAX_LENGTH: Final = 80
 _TOPIC_IMAGE_FOLDER: Final = "topics"
 
 
-class TopicQuerySet(models.QuerySet):
+class TopicQuerySet(models.QuerySet["Topic"]):
     def prefetch_words(self, words_queryset: WordQuerySet) -> TopicQuerySet:
         return self.prefetch_related(Prefetch("words", queryset=words_queryset))
 

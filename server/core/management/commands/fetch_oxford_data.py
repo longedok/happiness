@@ -7,6 +7,7 @@ from typing import Final
 
 from django.core.management.base import BaseCommand
 from django.db.models import Q
+
 from server.core.logic.oxford import update_oxford_data
 from server.core.models import Word
 

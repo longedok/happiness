@@ -8,8 +8,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from server.core.models import UserWord
-from server.core.models import Word
+from server.core.models import UserWord, Word
 
 
 class WordSerializer(serializers.ModelSerializer):
@@ -39,17 +38,17 @@ class WordViewSet(GenericViewSet):
     queryset = Word.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    @action(methods=["POST"], detail=True)
+    @action(methods=["POST"], detail=True)  # type: ignore
     def set_new(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         UserWord.objects.filter(user=request.user, word_id=kwargs["pk"]).delete()
         return Response(status=status.HTTP_201_CREATED)
 
-    @action(methods=["POST"], detail=True)
+    @action(methods=["POST"], detail=True)  # type: ignore
     def set_learning(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         self._set_status(UserWord.Status.LEARNING)
         return Response(status=status.HTTP_201_CREATED)
 
-    @action(methods=["POST"], detail=True)
+    @action(methods=["POST"], detail=True)  # type: ignore
     def set_learned(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         self._set_status(UserWord.Status.LEARNED)
         return Response(status=status.HTTP_201_CREATED)

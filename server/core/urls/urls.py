@@ -1,7 +1,7 @@
-from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.urls import path
 
-from server.core.views import words, scores, SignUpView, LogInView, SignUpSuccessView
+from server.core.views import LogInView, SignUpSuccessView, SignUpView, scores, words
 
 urlpatterns = [
     path("", words, name="words"),

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
-from server.core.models import Word, Topic, UserWord, Score, Scoreboard
+from server.core.models import Score, Scoreboard, Topic, UserWord, Word
 
 
 @admin.register(Word)
@@ -13,12 +13,12 @@ class WordAdmin(admin.ModelAdmin[Word]):
     list_filter = ("topic", "date")
     fields = ("word", "translation", "topic", "transcription")
 
-    def get_queryset(self, request: HttpRequest) -> QuerySet:
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Word]:
         return super().get_queryset(request).select_related("topic")
 
 
 @admin.register(Topic)
-class WordAdmin(admin.ModelAdmin[Topic]):
+class TopicAdmin(admin.ModelAdmin[Topic]):
     """Admin panel for `Topic` model."""
 
 

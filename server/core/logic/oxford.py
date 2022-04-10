@@ -1,7 +1,7 @@
 from django.utils import timezone
 
-from server.core.oxford import fetch_word
 from server.core.models import Word
+from server.core.oxford import fetch_word
 
 
 def update_oxford_data(word: Word) -> None:

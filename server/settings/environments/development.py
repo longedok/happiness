@@ -8,12 +8,8 @@ import logging
 from typing import List
 
 from server.settings.components import config
+from server.settings.components.common import DATABASES, INSTALLED_APPS, MIDDLEWARE
 from server.settings.components.csp import CSP_SCRIPT_SRC as CSP_SCRIPT_SRC_DEFAULT
-from server.settings.components.common import (
-    DATABASES,
-    INSTALLED_APPS,
-    MIDDLEWARE,
-)
 
 # Setting the development status:
 

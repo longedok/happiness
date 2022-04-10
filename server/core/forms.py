@@ -1,12 +1,22 @@
-from django.contrib.auth.forms import (
-    UserCreationForm as BaseUserCreationForm,
-    AuthenticationForm as BaseAuthenticationForm,
-    UsernameField,
-)
+from typing import Protocol, Iterable, TYPE_CHECKING
+
+from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationForm
+from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
+from django.contrib.auth.forms import UsernameField
+
 from server.users.models import User
 
+if TYPE_CHECKING:
+    from django.forms import BoundField
+    from django.forms.utils import ErrorDict
 
-class CustomFormMixin:
+
+class FormProtocol(Protocol):
+    errors: ErrorDict
+    def visible_fields(self) -> Iterable[BoundField]: ...
+
+
+class CustomFormMixin(FormProtocol):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

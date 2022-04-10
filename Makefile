@@ -81,3 +81,10 @@ ssh:
 
 pass:
 	pass show test
+
+check:
+	mypy server/
+
+fix:
+	isort server/
+	black server/

@@ -5,5 +5,5 @@ from rest_framework import serializers
 
 class NestedUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = apps.get_model(*settings.AUTH_USER_MODEL.split("."))
+        model = apps.get_model(*settings.AUTH_USER_MODEL.split("."))  # type: ignore
         fields = ("id", "username", "first_name")

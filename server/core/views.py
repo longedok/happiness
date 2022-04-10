@@ -1,28 +1,29 @@
 import json
 import logging
 
-from django.db.models import Sum, F, Q, Prefetch
+from django.contrib.auth import views as auth_views
+from django.db.models import F, Prefetch, Q, Sum
 from django.db.models.functions import Coalesce
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-from django.contrib.auth import views as auth_views
 
 from .api.scoreboard import ScoreboardSerializer
 from .api.topic import TopicSerializer
 from .api.word import WordSerializer
-from .models import Word, Topic, Scoreboard, Score
-from .forms import UserCreationForm, AuthenticationForm
+from .forms import AuthenticationForm, UserCreationForm
+from .models import Score, Scoreboard, Topic, Word
+from ..users.models import User
 
 logger = logging.getLogger(__name__)
 
 
 def words(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
-        words_qs = Word.objects.with_status(request.user)
+        words_qs = Word.objects.with_status(request.user)  # type: ignore
     else:
-        words_qs = Word.objects.with_status()
+        words_qs = Word.objects.with_status()  # type: ignore
 
     words_qs = words_qs.order_by("-date")
 
@@ -73,7 +74,7 @@ def scores(request: HttpRequest) -> HttpResponse:
     return render(request, "core/scores.html", context=context)
 
 
-class SignUpView(generic.CreateView):
+class SignUpView(generic.CreateView[User, UserCreationForm]):
     form_class = UserCreationForm
     success_url = reverse_lazy("signup-success")
     template_name = "core/signup.html"

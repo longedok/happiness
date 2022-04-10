@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Iterable
-
-from django.conf import settings
+from typing import Any, Iterable, TypeVar
 
 import requests
+from django.conf import settings
 from requests import RequestException
-
 
 BASE_URL = "https://od-api.oxforddictionaries.com/api/v2"
 ENTRIES_URL = f"{BASE_URL}/entries/en-gb"
@@ -29,7 +27,7 @@ class OxfordAPIError(Exception):
         super().__init__(message)
 
 
-def _get_entry(word_id: str) -> dict[str, Any] | None:
+def _get_entry(word_id: str) -> dict[str, Any]:
     try:
         response = requests.get(
             f"{ENTRIES_URL}/{word_id}", headers=HEADERS, timeout=OXFORD_API_TIMEOUT
@@ -43,7 +41,10 @@ def _get_entry(word_id: str) -> dict[str, Any] | None:
         raise OxfordAPIError(response.text, response.status_code)
 
 
-def _first(items: Iterable) -> Any:
+T = TypeVar("T")
+
+
+def _first(items: Iterable[T]) -> T | None:
     return next(iter(items), None)
 
 
@@ -52,19 +53,19 @@ def fetch_word(word_id: str) -> dict[str, Any] | None:
         data = _get_entry(word_id.lower())
     except OxfordAPIError as exc:
         logger.exception(exc)
-        return
+        return None
 
     if not (result := _first(data.get("results", []))):
-        return
+        return None
 
     if not (lexical_entry := _first(result.get("lexicalEntries", []))):
-        return
+        return None
 
     if not (entry := _first(lexical_entry.get("entries", []))):
-        return
+        return None
 
     if not (pronunciation := _first(entry.get("pronunciations", []))):
-        return
+        return None
 
     return {
         "audio_file": pronunciation.get("audioFile"),
