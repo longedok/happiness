@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import (
     UserCreationForm as BaseUserCreationForm,
-    AuthenticationForm as BaseAuthenticationForm, UsernameField,
+    AuthenticationForm as BaseAuthenticationForm,
+    UsernameField,
 )
 from server.users.models import User
 

@@ -15,84 +15,187 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Topic',
+            name="Topic",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=80, verbose_name='name')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='topics', verbose_name='image')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=80, verbose_name="name")),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="topics", verbose_name="image"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Topic',
-                'verbose_name_plural': 'Topics',
+                "verbose_name": "Topic",
+                "verbose_name_plural": "Topics",
             },
         ),
         migrations.CreateModel(
-            name='UserWord',
+            name="UserWord",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('status', models.CharField(choices=[('learning', 'Learning'), ('learned', 'Learned')], default='learning', max_length=20, verbose_name='status')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='updated at')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='words', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[("learning", "Learning"), ("learned", "Learned")],
+                        default="learning",
+                        max_length=20,
+                        verbose_name="status",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="created at")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="updated at")),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="words",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'User Word',
-                'verbose_name_plural': 'User Words',
+                "verbose_name": "User Word",
+                "verbose_name_plural": "User Words",
             },
         ),
         migrations.CreateModel(
-            name='Word',
+            name="Word",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('word', models.CharField(max_length=80, verbose_name='Word')),
-                ('translation', models.CharField(max_length=80, verbose_name='Translation')),
-                ('date', models.DateField(auto_now=True, verbose_name='Date')),
-                ('transcription', models.CharField(blank=True, max_length=80, verbose_name='Transcription')),
-                ('oxford_data', models.JSONField(blank=True, default=dict, verbose_name='Oxford data')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('topic', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='words', to='core.topic', verbose_name='topic')),
-                ('user', models.ManyToManyField(through='core.UserWord', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("word", models.CharField(max_length=80, verbose_name="Word")),
+                ("translation", models.CharField(max_length=80, verbose_name="Translation")),
+                ("date", models.DateField(auto_now=True, verbose_name="Date")),
+                (
+                    "transcription",
+                    models.CharField(blank=True, max_length=80, verbose_name="Transcription"),
+                ),
+                (
+                    "oxford_data",
+                    models.JSONField(blank=True, default=dict, verbose_name="Oxford data"),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Created at")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Updated at")),
+                (
+                    "topic",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="words",
+                        to="core.topic",
+                        verbose_name="topic",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ManyToManyField(through="core.UserWord", to=settings.AUTH_USER_MODEL),
+                ),
             ],
             options={
-                'verbose_name': 'Word',
-                'verbose_name_plural': 'Words',
+                "verbose_name": "Word",
+                "verbose_name_plural": "Words",
             },
         ),
         migrations.AddField(
-            model_name='userword',
-            name='word',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.word'),
+            model_name="userword",
+            name="word",
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="core.word"),
         ),
         migrations.CreateModel(
-            name='Scoreboard',
+            name="Scoreboard",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='Name')),
-                ('user_title', models.CharField(blank=True, max_length=100, verbose_name='User title')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('description', models.CharField(blank=True, max_length=255, verbose_name='Description')),
-                ('user_1', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL)),
-                ('user_2', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Name")),
+                (
+                    "user_title",
+                    models.CharField(blank=True, max_length=100, verbose_name="User title"),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Created at")),
+                (
+                    "description",
+                    models.CharField(blank=True, max_length=255, verbose_name="Description"),
+                ),
+                (
+                    "user_1",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="+",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "user_2",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="+",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Score',
+            name="Score",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField(auto_now_add=True, verbose_name='Date')),
-                ('score', models.IntegerField(verbose_name='score')),
-                ('description', models.CharField(blank=True, max_length=255, verbose_name='Description')),
-                ('scoreboard', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='scores', to='core.scoreboard')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='scores', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("date", models.DateTimeField(auto_now_add=True, verbose_name="Date")),
+                ("score", models.IntegerField(verbose_name="score")),
+                (
+                    "description",
+                    models.CharField(blank=True, max_length=255, verbose_name="Description"),
+                ),
+                (
+                    "scoreboard",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="scores",
+                        to="core.scoreboard",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="scores",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.AddConstraint(
-            model_name='userword',
-            constraint=models.CheckConstraint(check=models.Q(('status__in', ['learning', 'learned'])), name='core_userword_status_valid'),
+            model_name="userword",
+            constraint=models.CheckConstraint(
+                check=models.Q(("status__in", ["learning", "learned"])),
+                name="core_userword_status_valid",
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='userword',
-            unique_together={('word', 'user')},
+            name="userword",
+            unique_together={("word", "user")},
         ),
     ]

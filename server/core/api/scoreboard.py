@@ -15,6 +15,12 @@ class ScoreboardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scoreboard
         fields = (
-            "id", "name", "user_title", "user_1", "user_2", "scores", "user_1_score",
+            "id",
+            "name",
+            "user_title",
+            "user_1",
+            "user_2",
+            "scores",
+            "user_1_score",
             "user_2_score",
         )

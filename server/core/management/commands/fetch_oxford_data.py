@@ -31,9 +31,7 @@ class Command(BaseCommand):
             update_oxford_data(word)
 
             self.stdout.write(
-                self.style.SUCCESS(
-                    f"Fetched data for word {word.word}: {word.oxford_data}"
-                )
+                self.style.SUCCESS(f"Fetched data for word {word.word}: {word.oxford_data}")
             )
 
             if words_number > 1:

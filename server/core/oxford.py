@@ -70,5 +70,5 @@ def fetch_word(word_id: str) -> dict[str, Any] | None:
         "audio_file": pronunciation.get("audioFile"),
         "dialects": pronunciation.get("dialects"),
         "phonetic_notation": pronunciation.get("phoneticNotation"),
-        "phonetic_spelling": pronunciation.get("phoneticSpelling")
+        "phonetic_spelling": pronunciation.get("phoneticSpelling"),
     }

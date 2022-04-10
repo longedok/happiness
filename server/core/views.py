@@ -35,33 +35,23 @@ def words(request: HttpRequest) -> HttpResponse:
         "page": "words",
     }
 
-    return render(request, 'core/words.html', context=context)
+    return render(request, "core/words.html", context=context)
 
 
 def scores(request: HttpRequest) -> HttpResponse:
     user_id = request.user.id if request.user.is_authenticated else None
     scoreboards = (
-        Scoreboard.objects
-        .prefetch_related(
-            Prefetch(
-                "scores",
-                queryset=Score.objects.select_related("user").order_by("-date")
-            )
+        Scoreboard.objects.prefetch_related(
+            Prefetch("scores", queryset=Score.objects.select_related("user").order_by("-date"))
         )
         .select_related("user_1", "user_2")
         .annotate(
-            user_1_score=Coalesce(
-                Sum("scores__score", filter=Q(scores__user=F("user_1"))), 0
-            )
+            user_1_score=Coalesce(Sum("scores__score", filter=Q(scores__user=F("user_1"))), 0)
         )
         .annotate(
-            user_2_score=Coalesce(
-                Sum("scores__score", filter=Q(scores__user=F("user_2"))), 0
-            )
+            user_2_score=Coalesce(Sum("scores__score", filter=Q(scores__user=F("user_2"))), 0)
         )
-        .filter(
-            Q(user_1=user_id) | Q(user_2=user_id)
-        )
+        .filter(Q(user_1=user_id) | Q(user_2=user_id))
         .only(
             "id",
             "name",
@@ -80,7 +70,7 @@ def scores(request: HttpRequest) -> HttpResponse:
         "page": "scores",
     }
 
-    return render(request, 'core/scores.html', context=context)
+    return render(request, "core/scores.html", context=context)
 
 
 class SignUpView(generic.CreateView):

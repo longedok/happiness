@@ -23,39 +23,45 @@ admin.site.enable_nav_sidebar = False
 
 urlpatterns = [
     # Apps:
-    path('', include("server.core.urls.urls")),
-    path('api/', include("server.core.urls.api")),
-
+    path("", include("server.core.urls.urls")),
+    path("api/", include("server.core.urls.api")),
     # Health checks:
-    path('health/', include(health_urls)),  # noqa: DJ05
-
+    path("health/", include(health_urls)),  # noqa: DJ05
     # django-admin:
-    path('admin/doc/', include(admindocs_urls)),  # noqa: DJ05
-    path('admin/', admin.site.urls),
-
+    path("admin/doc/", include(admindocs_urls)),  # noqa: DJ05
+    path("admin/", admin.site.urls),
     # Text and xml static files:
-    path('robots.txt', TemplateView.as_view(
-        template_name='txt/robots.txt',
-        content_type='text/plain',
-    )),
-    path('humans.txt', TemplateView.as_view(
-        template_name='txt/humans.txt',
-        content_type='text/plain',
-    )),
-
+    path(
+        "robots.txt",
+        TemplateView.as_view(
+            template_name="txt/robots.txt",
+            content_type="text/plain",
+        ),
+    ),
+    path(
+        "humans.txt",
+        TemplateView.as_view(
+            template_name="txt/humans.txt",
+            content_type="text/plain",
+        ),
+    ),
     # It is a good practice to have explicit index view:
-    path('', words, name='index'),
+    path("", words, name="index"),
 ]
 
 if settings.DEBUG:  # pragma: no cover
     import debug_toolbar  # noqa: WPS433
     from django.conf.urls.static import static  # noqa: WPS433
 
-    urlpatterns = [
-        # URLs specific only to django-debug-toolbar:
-        path('__debug__/', include(debug_toolbar.urls)),  # noqa: DJ05
-    ] + urlpatterns + static(  # type: ignore
-        # Serving media files in development only:
-        settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT,
+    urlpatterns = (
+        [
+            # URLs specific only to django-debug-toolbar:
+            path("__debug__/", include(debug_toolbar.urls)),  # noqa: DJ05
+        ]
+        + urlpatterns
+        + static(  # type: ignore
+            # Serving media files in development only:
+            settings.MEDIA_URL,
+            document_root=settings.MEDIA_ROOT,
+        )
     )

@@ -20,8 +20,15 @@ class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
         fields = (
-            "id", "word", "translation", "transcription", "date", "status", "topic",
-            "audio", "date_display",
+            "id",
+            "word",
+            "translation",
+            "transcription",
+            "date",
+            "status",
+            "topic",
+            "audio",
+            "date_display",
         )
 
     def get_audio(self, obj):
