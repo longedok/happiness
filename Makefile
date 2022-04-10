@@ -73,7 +73,7 @@ psql:
 psql_prod:
 	docker-compose $(prod_compose) run --rm db psql -h db -d happiness -U happiness
 
-backupdb:
+backup:
 	./backupdb.sh
 
 pass:
