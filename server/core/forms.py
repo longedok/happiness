@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Protocol, Iterable, TYPE_CHECKING
 
 from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationForm
@@ -16,7 +18,13 @@ class FormProtocol(Protocol):
     def visible_fields(self) -> Iterable[BoundField]: ...
 
 
-class CustomFormMixin(FormProtocol):
+if TYPE_CHECKING:
+    _Base = FormProtocol
+else:
+    _Base = object
+
+
+class CustomFormMixin(_Base):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

@@ -57,9 +57,9 @@ def scores(request: HttpRequest) -> HttpResponse:
             "id",
             "name",
             "user_title",
-            "user_1__first_name",
+            "user_1__name",
             "user_1__username",
-            "user_2__first_name",
+            "user_2__name",
             "user_2__username",
         )
     )
